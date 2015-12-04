@@ -580,10 +580,9 @@ function Equilizer(ctx, id, name) {
 
                 that.opts.ctx.initTime = Math.floor(that.source.context.currentTime);
                 that.opts.source.state = that.opts.states.play;
-                // auslagern
+
                 that.run();
                 that.step();
-
             });
 
         };
@@ -631,6 +630,10 @@ function Equilizer(ctx, id, name) {
         that.opts.ctx.prevTime = Math.floor(that.source.context.currentTime);
     }
 
+    this.updateTitle = function(name) {
+        $( that.id + ' .title span').html(name);
+    };
+
     /**
      * Dropzone field
      */
@@ -641,8 +644,9 @@ function Equilizer(ctx, id, name) {
                 this.on("success", function (file, responseText) {
                     //var responseText = responseText.globalPath; // or however you would point to your assigned file ID here;
                     var url = responseText.file.globalPath;
+                    var title = responseText.file.filename;
                     console.log(responseText.file);
-
+                    that.updateTitle(title);
                     that.loadSound(url);
                 })
             }

@@ -9,7 +9,8 @@ mixin soundboard(parent, name)
    .row
       .col.s12.grey.darken-3.white-text
          div(id= parent).section.no-pad-bot
-            +header('equalizer', name)
+            .title
+               +header('dashboard', name)
             +hr
             +canvas(parent)
 
