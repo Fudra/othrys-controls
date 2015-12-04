@@ -19,7 +19,9 @@ mixin controlpannel(parent)
             +hr
             .row.margin-top-20
                .col.s6.max-height-120
-                  +knob(parent + '-gain-gain', 'Gain', '#ffec03')
+                  +knob(parent + '-gain-gain', 'Gain', 50,'#ffec03')
+               .col.s6.max-height-120
+                  +knob(parent + '-playrate', 'Playrate', 1, '#66CC66')
 
          div(id=parent+'-highpass').col.s12
             +header('filter_list', 'Highpass')

@@ -3,9 +3,9 @@
 // blue : #C0ffff
 // green: #66CC66
 
-mixin knob(classid, label, fgColor )
+mixin knob(classid, label, value, fgColor )
    div(style={"width" : "100px"}).knob.center-knob
-      input(type=text, value=50, class=gain,
+      input(type=text, value=value, class=gain,
          id= classid,
          data-width=100,
          data-fgColor=fgColor,

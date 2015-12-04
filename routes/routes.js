@@ -15,13 +15,14 @@ router.get('/', function (req, res, next) {
     res.render('index');
 });
 
-
+/* POST for Upload*/
 router.post('/upload', multipartMiddleware, function (req, res, next) {
     console.log(req.body, req.files);
 
     var tmpPath = req.files.file.path;
     var responsePath = 'music/' + slug(req.files.file.originalFilename);
     var targetPath = './public/' + responsePath;
+    var filename = req.files.file.name.substring(0, req.files.file.name.lastIndexOf('.'));
 
     // TODO: Make it Clean!!
     var globalPath = "http://localhost:3000/";
@@ -38,6 +39,7 @@ router.post('/upload', multipartMiddleware, function (req, res, next) {
                 code: 200
             },
             file: {
+                filename: filename,
                 path: responsePath,
                 globalPath: globalPath + responsePath,
                 size: req.files.file.size

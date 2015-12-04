@@ -23,7 +23,6 @@ function Equilizer(ctx, id, name) {
     this.bandpass = null;
 
 
-
     /**
      * Init
      */
@@ -190,6 +189,9 @@ function Equilizer(ctx, id, name) {
         // gain
         this.gain.gain.value = this.opts.gain.value;
 
+        // playrate
+        this.source.playbackRate.value = this.opts.source.playrate;
+
 
         // apply filter
         updateFilter('highpass');
@@ -200,7 +202,7 @@ function Equilizer(ctx, id, name) {
     };
 
     function updateFilter(f) {
-        console.log(f, that.opts.filter[f]);
+        //console.log(f, that.opts.filter[f]);
 
         //console.log('opts:', that.opts.filter[f]);
         //console.log('freq', that.filter.highpass ,that.opts.filter[f].frequency);
@@ -264,6 +266,8 @@ function Equilizer(ctx, id, name) {
         this.$current =  $(this.id + ' .current');
         this.$duraton =  $(this.id + ' .duration');
 
+        this.$playrate = $(this.id + '-playrate');
+
         // set ui Eleemntes
         this.$vis.visualizer({
             analyser: this.analyser,
@@ -301,6 +305,15 @@ function Equilizer(ctx, id, name) {
             release: oscillator_frequency
         });
 
+        this.$playrate.knob({
+            min : 0,
+            max : 2,
+            step: .1,
+
+            change: playrate,
+            release: playrate
+        });
+
 
         this.$ot.on('change', function() {
             that.opts.oscillator.frequency.type = that.$ot.find("input[type='radio']:checked").val();
@@ -333,6 +346,7 @@ function Equilizer(ctx, id, name) {
             //this.$play.fadeIn();
             //this.$pause.fadeOut();
         });
+
 
         // higpass
         this.filter.highpass.$gain.knob({
@@ -461,6 +475,11 @@ function Equilizer(ctx, id, name) {
             that.update();
         }
 
+        function playrate(value) {
+            that.opts.source.playrate = value;
+            that.update();
+        }
+
         // highpass
         function highpass_gain(value) {
             that.opts.filter.highpass.gain = value / 100;
@@ -525,7 +544,6 @@ function Equilizer(ctx, id, name) {
         }
     };
 
-
     function initUiFilter(filter, type) {
         filter.$gain  = $(that.id +'-'+ type+ '-gain');
         filter.$Q  = $(that.id +'-'+ type+ '-q');
@@ -534,10 +552,6 @@ function Equilizer(ctx, id, name) {
         return filter;
     }
 
-    function createFilterKnobs(filter) {
-
-        return filter;
-    }
 
     /**
      * run app.
@@ -553,7 +567,7 @@ function Equilizer(ctx, id, name) {
      * @param url
      */
     this.loadSound = function(url) {
-        //console.log('load sound:', url);
+        console.log('load sound:', url);
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
         request.responseType = 'arraybuffer';
@@ -584,19 +598,20 @@ function Equilizer(ctx, id, name) {
         that.opts.ctx.initTime += pauseTime;
     }
     /**
-     * todo: update progress
+     * update progress
      */
     this.step = function() {
 
         // check if finish
-        if(that.opts.source.progress == that.opts.progress.finish ){
+        if(that.opts.source.progress == that.opts.progress.finish )
+        {
             that.opts.source.state = that.opts.states.finish;
             return;
         }
 
         if(that.opts.source.state == that.opts.states.play )
         {
-            that.opts.source.current = Math.floor(that.ctx.currentTime - that.opts.ctx.initTime);
+            that.opts.source.current = Math.floor((that.ctx.currentTime * that.opts.source.playrate) - that.opts.ctx.initTime);
             that.opts.source.progress = Math.floor(that.opts.source.current/that.opts.source.duration * 100);
         }
 
@@ -626,6 +641,7 @@ function Equilizer(ctx, id, name) {
                 this.on("success", function (file, responseText) {
                     //var responseText = responseText.globalPath; // or however you would point to your assigned file ID here;
                     var url = responseText.file.globalPath;
+                    console.log(responseText.file);
 
                     that.loadSound(url);
                 })
