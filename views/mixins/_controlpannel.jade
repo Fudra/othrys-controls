@@ -30,7 +30,9 @@ mixin controlpannel(parent)
          divqa(id=parent+'-bandpass').col.s12
             +header('graphic_eq', 'Bandpass', 'rotate-only-90')
             +hr
+            +filter(parent,'bandpass')
 
          div(id=parent+'-lowpass').col.s12
             +header('filter_list', 'Lowpass', 'rotate-only-180')
             +hr
+            +filter(parent,'lowpass')
