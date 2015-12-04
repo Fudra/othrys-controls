@@ -330,9 +330,8 @@ function Equilizer(ctx, id, name) {
             //that.ctx.resume();
             calcPauseTime();
             setPlaybackRate(that.opts.source.playrate);
-            //// hide button
-            //this.$play.fadeOut();
-            //this.$pause.fadeIn();
+
+            that.togglePlayPause()
         });
 
         this.$pause.on('click', function() {
@@ -343,8 +342,7 @@ function Equilizer(ctx, id, name) {
 
             setPlaybackRate(0);
 
-            //this.$play.fadeIn();
-            //this.$pause.fadeOut();
+            that.togglePlayPause();
         });
 
 
@@ -552,6 +550,19 @@ function Equilizer(ctx, id, name) {
         return filter;
     }
 
+    this.togglePlayPause = function() {
+        that.$play.toggle();
+        that.$pause.toggle();
+    };
+
+    this.hidePlayButton = function() {
+        that.$play.hide();
+    };
+
+    this.hidePauseButton = function() {
+        that.$pause.hide();
+    }
+
 
     /**
      * run app.
@@ -649,6 +660,7 @@ function Equilizer(ctx, id, name) {
                     that.updateTitle(title);
                     toggleDropzoneAndPlayer();
                     that.loadSound(url);
+                    that.hidePlayButton();
                 })
             }
         };
