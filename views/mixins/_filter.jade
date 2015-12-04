@@ -1,10 +1,10 @@
 mixin filter(parent, name)
     .row.margin-top-20
         .col.s6.max-height-120
-            +knob(parent +  '-' + name +'' +'-gain', 'Gain', '#ffec03')
+            +knob(parent + '-' + name + '-' + 'gain', 'Gain', '#ffec03')
         .col.s6.max-height-120
-            +knob(parent +  '-' + name +'' +'-frequency', 'Frequency', '#66CC66')
+            +knob(parent + '-' + name + '-' + 'frequency', 'Frequency', '#66CC66')
         .col.s6.max-height-120
-            +knob(parent + '-' + name + '' + '-detune', 'Detune','#C0ffff')
-        .col.s6.max-height-120
-            +knob(parent +  '-' + name +'' +'-q', 'Q','#C0ffff')
+            +knob(parent + '-' + name + '-' + 'detune', 'Detune','#C0ffff')
+        //.col.s6.max-height-120
+        //    +knob(parent +  '-' + name +'' +'-q', 'Q','#C0ffff')

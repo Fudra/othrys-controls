@@ -15,9 +15,13 @@ function Equilizer(ctx, id, name) {
     this.output = null;
     this.source = null;
 
+    this.spliiter = null;
+    this.merger = null;
+
     this.highpass = null;
     this.lowpass = null;
     this.bandpass = null;
+
 
 
     /**
@@ -44,6 +48,10 @@ function Equilizer(ctx, id, name) {
 
         //biquadfilter - bandpass
         this.bandpass = this.ctx.createBiquadFilter();
+
+        // slitter and merger
+        this.spliiter = this.ctx.createChannelSplitter(3);
+        this.merger = this.ctx.createChannelMerger(3);
 
 
         // AudioNode
@@ -211,9 +219,30 @@ function Equilizer(ctx, id, name) {
      */
     this.connect = function() {
         //this.oscillator.connect(this.gain);
-        this.source.connect(this.gain);
+
+        // split channels from source
+        this.source.connect(this.spliiter);
+
+        // connect each channel to filter
+        this.spliiter.connect(this.highpass, 0);
+        this.spliiter.connect(this.bandpass, 1);
+        this.spliiter.connect(this.lowpass, 2);
+
+        // merge channels together
+        this.highpass.connect(this.merger, 0, 0);
+        this.bandpass.connect(this.merger, 0, 1);
+        this.lowpass.connect(this.merger, 0, 2);
+
+
+        // connect to gain
+        this.merger.connect(this.gain);
+
+        // connect to analyser
         this.gain.connect(this.analyser);
+
+        // output
         this.output = this.analyser;
+
     };
 
     /**
