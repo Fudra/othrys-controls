@@ -1,0 +1,31 @@
+.dropzone-container {
+
+  .dropzone {
+    background: $dropzone-background;
+    border: none;
+    color: $dropzone-color;
+    font-size: 1.4em;
+    font-style: italic;
+
+    &:hover {
+
+      color: $dropzone-color-hover;
+
+    }
+
+    span {
+      &:hover {
+
+        color: $dropzone-color-hover;
+
+      }
+    }
+
+    .dz-preview {
+
+      .dz-image {
+        border-radius: 10px;
+      }
+    }
+  }
+}

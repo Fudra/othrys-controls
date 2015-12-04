@@ -103,3 +103,16 @@ label {
 
 .tabs .indicator {
   background-color: #e0e0e0; }
+
+.dropzone-container .dropzone {
+  background: #616161;
+  border: none;
+  color: #9a9a9a;
+  font-size: 1.4em;
+  font-style: italic; }
+  .dropzone-container .dropzone:hover {
+    color: #e0e0e0; }
+  .dropzone-container .dropzone span:hover {
+    color: #e0e0e0; }
+  .dropzone-container .dropzone .dz-preview .dz-image {
+    border-radius: 10px; }
