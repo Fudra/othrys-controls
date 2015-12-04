@@ -184,23 +184,22 @@ function Equilizer(ctx, id, name) {
 
 
         // apply filter
-        // highpass
-        defineFilter('highpass');
-        defineFilter('lowpass');
-        defineFilter('bandpass');
+        updateFilter('highpass');
+        updateFilter('lowpass');
+        updateFilter('bandpass');
 
 
     };
 
-    function defineFilter(f) {
-        console.log(f, that[f]);
+    function updateFilter(f) {
+        console.log(f, that.opts.filter[f]);
 
         //console.log('opts:', that.opts.filter[f]);
         //console.log('freq', that.filter.highpass ,that.opts.filter[f].frequency);
 
         that[f].type = that.opts.filter[f].TYPE;
-        //that[f].Q.value = that.opts.filter[f].Q;
-        //that[f].detune.value = that.opts.filter[f].detune;
+        //that[f].Q.value = that.opts.filter[f].Q ;
+        that[f].detune.value = that.opts.filter[f].detune;
         that[f].frequency.value = that.opts.filter[f].frequency;
         that[f].gain.value = that.opts.filter[f].gain;
         //console.log(f,that.filter[f]);
@@ -306,7 +305,7 @@ function Equilizer(ctx, id, name) {
             //this.$pause.fadeOut();
         });
 
-
+        // higpass
         this.filter.highpass.$gain.knob({
             min : 0,
             max : 100,
@@ -343,6 +342,81 @@ function Equilizer(ctx, id, name) {
             release: highpass_frequency
         });
 
+        // lowpass
+        this.filter.lowpass.$gain.knob({
+            min : 0,
+            max : 100,
+            step: 1,
+
+            change: lowpass_gain,
+            release: lowpass_gain
+        });
+
+        this.filter.lowpass.$Q.knob({
+            min : 0,
+            max : 1000,
+            step: 1,
+
+            change: lowpass_q,
+            release: lowpass_q
+        });
+
+        this.filter.lowpass.$detune.knob({
+            min : 0,
+            max : 1000,
+            step: 1,
+
+            change: lowpass_detune,
+            release: lowpass_detune
+        });
+
+        this.filter.lowpass.$frequency.knob({
+            min : 0,
+            max : 10000,
+            step: 25,
+
+            change: lowpass_frequency,
+            release: lowpass_frequency
+        });
+
+
+        // bandpass
+        this.filter.bandpass.$gain.knob({
+            min : 0,
+            max : 100,
+            step: 1,
+
+            change: bandpass_gain,
+            release: bandpass_gain
+        });
+
+        this.filter.bandpass.$Q.knob({
+            min : 0,
+            max : 1000,
+            step: 1,
+
+            change: bandpass_q,
+            release: bandpass_q
+        });
+
+        this.filter.bandpass.$detune.knob({
+            min : 0,
+            max : 1000,
+            step: 1,
+
+            change: bandpass_detune,
+            release: bandpass_detune
+        });
+
+        this.filter.bandpass.$frequency.knob({
+            min : 0,
+            max : 10000,
+            step: 25,
+
+            change: bandpass_frequency,
+            release: bandpass_frequency
+        });
+
 
 
         // run event code
@@ -358,6 +432,7 @@ function Equilizer(ctx, id, name) {
             that.update();
         }
 
+        // highpass
         function highpass_gain(value) {
             that.opts.filter.highpass.gain = value / 100;
             that.update();
@@ -375,6 +450,48 @@ function Equilizer(ctx, id, name) {
 
         function highpass_q(value) {
             that.opts.filter.highpass.q = value;
+            that.update();
+        }
+
+        // lowpass
+        function lowpass_gain(value) {
+            that.opts.filter.lowpass.gain = value / 100;
+            that.update();
+        }
+
+        function lowpass_frequency(value) {
+            that.opts.filter.lowpass.frequency = value;
+            that.update();
+        }
+
+        function lowpass_detune(value) {
+            that.opts.filter.lowpass.detune = value ;
+            that.update();
+        }
+
+        function lowpass_q(value) {
+            that.opts.filter.lowpass.q = value;
+            that.update();
+        }
+
+        // bandpass
+        function bandpass_gain(value) {
+            that.opts.filter.bandpass.gain = value / 100;
+            that.update();
+        }
+
+        function bandpass_frequency(value) {
+            that.opts.filter.bandpass.frequency = value;
+            that.update();
+        }
+
+        function bandpass_detune(value) {
+            that.opts.filter.bandpass.detune = value ;
+            that.update();
+        }
+
+        function bandpass_q(value) {
+            that.opts.filter.bandpass.q = value;
             that.update();
         }
     };
