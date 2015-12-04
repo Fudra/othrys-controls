@@ -1,4 +1,5 @@
 mixin dropzone(parent)
-   form(action="upload", class='dropzone', method="post",enctype="multipart/form-data" , id=parent)
-      .fallback
-         input(type="file", name=parent)
+   .dropzone-container
+      form(action="upload", class='dropzone', method="post",enctype="multipart/form-data" , id=parent)
+         .fallback
+            input(type="file", name=parent)

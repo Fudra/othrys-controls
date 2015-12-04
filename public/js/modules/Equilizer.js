@@ -647,6 +647,7 @@ function Equilizer(ctx, id, name) {
                     var title = responseText.file.filename;
                     console.log(responseText.file);
                     that.updateTitle(title);
+                    toggleDropzoneAndPlayer();
                     that.loadSound(url);
                 })
             }
@@ -669,6 +670,11 @@ function Equilizer(ctx, id, name) {
     function setPlaybackRate(rate) {
         that.source.playbackRate.value = rate;
         //console.log(that.source); // .playbackRate.value
+    }
+
+    function toggleDropzoneAndPlayer() {
+        $(that.id + ' .player').slideToggle();
+        $(that.id + ' .dropzone-container').slideToggle();
     }
 
 }
