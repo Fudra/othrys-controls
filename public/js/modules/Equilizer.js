@@ -212,6 +212,7 @@ function Equilizer(ctx, id, name) {
         that[f].detune.value = that.opts.filter[f].detune;
         that[f].frequency.value = that.opts.filter[f].frequency;
         that[f].gain.value = that.opts.filter[f].gain;
+        console.log(f, that[f].gain.value);
         //console.log(f,that.filter[f]);
 
     }
@@ -348,8 +349,8 @@ function Equilizer(ctx, id, name) {
 
         // higpass
         this.filter.highpass.$gain.knob({
-            min : 0,
-            max : 100,
+            min : -40,
+            max : 40,
             step: 1,
 
             change: highpass_gain,
@@ -385,8 +386,8 @@ function Equilizer(ctx, id, name) {
 
         // lowpass
         this.filter.lowpass.$gain.knob({
-            min : 0,
-            max : 100,
+            min : -40,
+            max : 40,
             step: 1,
 
             change: lowpass_gain,
@@ -423,8 +424,8 @@ function Equilizer(ctx, id, name) {
 
         // bandpass
         this.filter.bandpass.$gain.knob({
-            min : 0,
-            max : 100,
+            min : -40,
+            max : 40,
             step: 1,
 
             change: bandpass_gain,
@@ -480,7 +481,7 @@ function Equilizer(ctx, id, name) {
 
         // highpass
         function highpass_gain(value) {
-            that.opts.filter.highpass.gain = value / 100;
+            that.opts.filter.highpass.gain = value;
             that.update();
         }
 
@@ -501,7 +502,7 @@ function Equilizer(ctx, id, name) {
 
         // lowpass
         function lowpass_gain(value) {
-            that.opts.filter.lowpass.gain = value / 100;
+            that.opts.filter.lowpass.gain = value ;
             that.update();
         }
 
@@ -522,7 +523,7 @@ function Equilizer(ctx, id, name) {
 
         // bandpass
         function bandpass_gain(value) {
-            that.opts.filter.bandpass.gain = value / 100;
+            that.opts.filter.bandpass.gain = value ;
             that.update();
         }
 
