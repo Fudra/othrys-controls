@@ -1,0 +1,22 @@
+include _header
+include _hr
+include _canvas
+include _player
+include _dropzone
+include _controlpannel
+
+mixin soundboard(parent, name)
+   .row
+      .col.s12.grey.darken-3.white-text
+         div(id= parent).section.no-pad-bot
+            +header('equalizer', name)
+            +hr
+            +canvas(parent)
+
+            +controlpannel(parent)
+
+            +hr
+            +player
+            +dropzone(parent)
+
+

@@ -1,0 +1,28 @@
+{
+  "name": "othrys-controls",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Philipp Wahle <phil.wahle@student.htw-berlin.de>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Materialize": "materialize#~0.97.3",
+    "jQuery-Knob": "git://github.com/aterrien/jQuery-Knob.git#~1.2.12",
+    "icon": "http://fonts.googleapis.com/icon?family=Material+Icons",
+    "font-awesome": "fontawesome#~4.5.0",
+    "dropzone": "~4.2.0"
+
+  },
+  "devDependencies": {
+  }
+}

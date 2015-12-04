@@ -1,0 +1,27 @@
+.player-container {
+  margin-bottom: 15px;
+  margin-top: 15px;
+
+  .inner {
+    border: 1px solid #111;
+    background-color: #222;
+  }
+
+}
+
+.player-progress-value {
+  padding-top: 8px;
+  height: 22px;
+}
+.player-control-group {
+  height: 22px;
+
+  .player-control {
+    color: #9e9e9e;
+    cursor: pointer;
+
+    &:hover {
+      color: #e0e0e0;
+    }
+  }
+}

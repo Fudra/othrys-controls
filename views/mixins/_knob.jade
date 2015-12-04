@@ -1,0 +1,16 @@
+// fgColor:
+// yellow : #ffec03
+// blue : #C0ffff
+// green: #66CC66
+
+mixin knob(classid, label, fgColor )
+   div(style={"width" : "100px"}).knob.center-knob
+      input(type=text, value=50, class=gain,
+         id= classid,
+         data-width=100,
+         data-fgColor=fgColor,
+         data-thickness=".1",
+         data-angleOffset=-125,
+         data-angleArc=250)
+      label(for= classid).knob-label= label
+

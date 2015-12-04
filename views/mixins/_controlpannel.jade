@@ -1,0 +1,36 @@
+include _tab
+include _hr
+include _knob
+include _header
+include _filter
+
+mixin controlpannel(parent)
+   .no-margin-bottom
+      .row
+         ul.tabs#tabs-main-row
+            +tab('#'+parent+'-controls', 'settings_input_composite', 'Controls', '')
+            +tab('#'+parent+'-highpass', 'filter_list', 'Highpass', '')
+            +tab('#'+parent+'-bandpass', 'graphic_eq', 'Bandpass' , 'rotate-90')
+            +tab('#'+parent+'-lowpass', 'filter_list', 'Lowpass', 'rotate-180')
+
+      .row
+         div(id=parent+'-controls').col.s12
+            +header('settings_input_composite', 'Controls')
+            +hr
+            .row.margin-top-20
+               .col.s6.max-height-120
+                  +knob(parent + '-gain-gain', 'Gain', '#ffec03')
+
+         div(id=parent+'-highpass').col.s12
+            +header('filter_list', 'Highpass')
+            +hr
+            +filter(parent,'highpass')
+
+
+         divqa(id=parent+'-bandpass').col.s12
+            +header('graphic_eq', 'Bandpass', 'rotate-only-90')
+            +hr
+
+         div(id=parent+'-lowpass').col.s12
+            +header('filter_list', 'Lowpass', 'rotate-only-180')
+            +hr

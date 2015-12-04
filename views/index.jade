@@ -1,0 +1,16 @@
+
+extends  master
+
+include mixins/_soundboard
+
+block content
+   .container
+      .row
+         .col.s5
+            +soundboard('sound1', 'track #01')
+         .col.s1
+            section.section
+
+         .col.s5
+            +soundboard('sound2', 'track #02')
+

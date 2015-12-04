@@ -1,0 +1,19 @@
+.rotate-90{
+  transform: rotate(-90deg) translateY(-50%) !important;
+}
+
+.rotate-180 {
+  transform: rotate(180deg) translateX(50%) !important;
+}
+
+
+.rotate-only-90{
+  transform: rotate(-90deg) !important;
+}
+
+.rotate-only-180 {
+  transform: rotate(180deg) !important;
+}
+
+
+

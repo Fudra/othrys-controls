@@ -1,0 +1,48 @@
+//<div class="row no-margin-bottom">
+//<ul class="tabs" id="tabs-row-1">
+//<li class="tab col s3 center">
+//<a  href="#test1" class="waves-effect waves-light active">
+//<i class="small material-icons">volume_down</i>
+//<span>Gain</span>
+//</a>
+//</li>
+//<li class="tab col s3">
+//<a href="#test2" class="waves-effect waves-light">
+//<i class="small material-icons">equalizer</i>
+//<span>Oscillator</span>
+//</a>
+//</li>
+//<li class="tab col s3">
+//<a href="#test3" class="waves-effect waves-light">
+//<i class="small material-icons">settings_input_composite</i>
+//<span>Controls</span>
+//</a>
+//</li>
+//<li class="tab col s3">
+//<a href="#test4" class="waves-effect waves-light">
+//<i class="small material-icons">dashboard</i>
+//<span>Playback</span>
+//</a>
+//</li>
+//</ul>
+//</div>
+include ../mixins/_tab
+
+.no-margin-bottom
+   .row
+      ul.tabs#tabs-main-row
+         +tab('#controls','settings_input_composite','Controls' , '')
+         +tab('#','filter_list','Highpass', '')
+         +tab('#','graphic_eq','Midpass' , 'rotate-90')
+         +tab('#','filter_list','Lowpass', 'rotate-180')
+
+
+//tabs
+
+.row
+   #controls.col.s12
+      +header("settings_input_composite", 'Controls')
+      +hr
+      .section
+         .row
+            .col.s5.offset-s1

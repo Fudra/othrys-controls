@@ -1,0 +1,105 @@
+.rotate-90 {
+  transform: rotate(-90deg) translateY(-50%) !important; }
+
+.rotate-180 {
+  transform: rotate(180deg) translateX(50%) !important; }
+
+.rotate-only-90 {
+  transform: rotate(-90deg) !important; }
+
+.rotate-only-180 {
+  transform: rotate(180deg) !important; }
+
+.no-margin-bottom {
+  margin-bottom: 0; }
+
+.max-height-120 {
+  max-height: 120px;
+  min-height: 120px;
+  overflow: hidden; }
+
+.center-knob {
+  margin: 0 auto; }
+
+.margin-top-20 {
+  margin-top: 20px; }
+
+.page-header {
+  margin-top: 20px;
+  padding-left: 30px;
+  margin-bottom: 0; }
+
+.analyser {
+  height: 60px;
+  margin: 5px auto; }
+  .analyser canvas {
+    width: 100%;
+    height: 50px;
+    background: #002D3C;
+    float: left; }
+
+.knob {
+  position: relative;
+  overflow: hidden; }
+
+.knob-label {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%); }
+
+label {
+  font-size: 1rem; }
+
+.player-container {
+  margin-bottom: 15px;
+  margin-top: 15px; }
+  .player-container .inner {
+    border: 1px solid #111;
+    background-color: #222; }
+
+.player-progress-value {
+  padding-top: 8px;
+  height: 22px; }
+
+.player-control-group {
+  height: 22px; }
+  .player-control-group .player-control {
+    color: #9e9e9e;
+    cursor: pointer; }
+    .player-control-group .player-control:hover {
+      color: #e0e0e0; }
+
+.tabs {
+  height: 93px;
+  background-color: #616161; }
+
+.tabs .tab {
+  line-height: 93px;
+  height: 93px;
+  position: relative; }
+
+.tabs .tab i {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  top: 0.6em; }
+
+.tabs .tab span {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  bottom: -1em;
+  font-size: 12px; }
+
+.tabs .tab a {
+  color: #9e9e9e; }
+
+.tabs .tab a.active,
+.tabs .tab a:hover {
+  color: #e0e0e0; }
+
+.tabs .indicator {
+  background-color: #e0e0e0; }

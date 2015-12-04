@@ -1,0 +1,12 @@
+.analyser {
+  height: 60px;
+  margin: 5px auto;
+
+  canvas {
+    width:100%;
+    height:50px;
+    background: $analyser-color;
+    float: left;
+  }
+
+}
