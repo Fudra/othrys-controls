@@ -2,6 +2,11 @@
 $(function() {
     var ctx = new (window.AudioContext || window.webkitAudioContext)();
 
+    var merger = ctx.createChannelMerger(2);
+    var gain = ctx.createGain();
+
+
+
     var eq1 = new Equilizer(ctx, '#sound1', 'sound1');
     eq1.init();
 

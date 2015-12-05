@@ -480,6 +480,13 @@ function Equilizer(ctx, id, name) {
         }
 
         // highpass
+        //
+        // funktion optimization
+        //function filter_gain(filter, value) {
+        //    that.opts.filter[filter].gain = value;
+        //    that.update();
+        //}
+
         function highpass_gain(value) {
             that.opts.filter.highpass.gain = value;
             that.update();
