@@ -12,14 +12,12 @@ $(function() {
 
     var eq2 = new Equilizer(ctx, '#sound2', 'sound2');
     eq2.init();
-    //eq1.run();
 
-    // todo: connect eq outputs to merger
-    // todo: create a crossfader
+    var cf = new Crossfade(ctx,'cf', 100, eq1.output, eq2.output);
     // todo: create a pan
     // todo: create a main gain
 
-    eq1.output.connect(ctx.destination);
+    cf.output.connect(ctx.destination);
 
 
 });

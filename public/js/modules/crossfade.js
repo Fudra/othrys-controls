@@ -11,7 +11,7 @@
  * @param src2 the source of the sound
  */
 
-function crossfade(ctx, id, initGain, src1, src2) {
+function Crossfade(ctx, id, initGain, src1, src2) {
 
 
     var that = this;
@@ -87,7 +87,7 @@ function crossfade(ctx, id, initGain, src1, src2) {
     this.fade = function(value) {
             // value  between -100 und 100
 
-        var v = (value + 100) - 100;
+        var v = (value + 100) / 2;
 
         var x = v / 100;
 
