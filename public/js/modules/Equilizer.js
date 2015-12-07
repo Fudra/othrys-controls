@@ -569,7 +569,7 @@ function Equilizer(ctx, id, name) {
 
     this.hidePauseButton = function() {
         that.$pause.hide();
-    }
+    };
 
 
     /**

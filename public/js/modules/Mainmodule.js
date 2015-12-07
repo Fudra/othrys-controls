@@ -1,14 +1,19 @@
 function Mainmodule(ctx, id) {
 
     var that = this;
-    that.id = id;
+    this.id = id;
     this.ctx = ctx;
 
-    this.gain = this.ctx.createGain();
-    this.pan = this.ctx.createStereoPanner();
+    this.gain = null;
+    this.pan = null;
+    this.analyser = null;
 
 
     this.init = function(src) {
+
+        this.gain = this.ctx.createGain();
+        this.pan = this.ctx.createStereoPanner();
+        this.analyser = this.ctx.createAnalyser();
 
         this.src = src;
         this.config();
@@ -31,15 +36,24 @@ function Mainmodule(ctx, id) {
     };
 
     this.connect = function() {
-        this.src.connect(this.pan);
-        this.pan.connect(this.gain);
-        this.output = this.gain;
+        this.src.connect(this.gain);
+        this.gain.connect(this.pan);
+        this.pan.connect(this.analyser);
+        this.output = this.analyser;
     };
 
     this.ui = function() {
+
+        this.$vis =  $('canvas#'+this.id);
         this.$gain = $('#'+id+'-gain-gain');
         this.$pan = $('#'+id+'-pan');
 
+
+        this.$vis.visualizer({
+            analyser: this.analyser,
+            width : 1,
+            x : 2
+        });
 
         this.$gain.knob({
             min : 0,
