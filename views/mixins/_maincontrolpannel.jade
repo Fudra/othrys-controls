@@ -1,0 +1,27 @@
+include _tab
+include _hr
+include _knob
+include _header
+
+mixin maincontrolpannel(parent)
+    .no-margin-bottom
+        .row
+            ul.tabs#tabs-main-row
+                +tab('#' + parent + '-controls', 'settings_input_composite', 'Controls', '')
+                +tab('#' + parent + '-songs', 'list', 'Songs', '')
+
+        .row
+            div(id=parent+'-controls').col.s12
+                +header('settings_input_composite', 'Controls')
+                +hr
+                .row.margin-top-20
+                    .col.s6.max-height-120
+                        +knob(parent + '-gain-gain', 'Gain', 50,'#ffec03')
+                    .col.s6.max-height-120
+                        +knob(parent + '-crossfade', 'Crossfade', -100, '#66CC66')
+                    .col.s6.max-height-120
+                        +knob(parent + '-pan', 'Pan', 0, '#C0ffff')
+
+            .div(id=parent+'-songs').col.s12
+                +header('list', 'Songs')
+                +hr

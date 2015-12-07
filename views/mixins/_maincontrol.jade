@@ -1,0 +1,14 @@
+include _maincontrolpannel
+
+mixin maincontrol(parent, name)
+   .row
+      .col.s12
+         div(id= parent).section.grey.darken-3.white-text
+            .row.no-pad-bot
+               .col.s12.title
+                  +header('dashboard', name)
+                  +hr
+
+            +canvas(parent)
+
+            +maincontrolpannel(parent)
