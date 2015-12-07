@@ -7,11 +7,12 @@ include _controlpannel
 
 mixin soundboard(parent, name)
    .row
-      .col.s12.grey.darken-3.white-text
-         div(id= parent).section.no-pad-bot
-            .title
-               +header('dashboard', name)
-            +hr
+      .col.s12
+         div(id= parent).section.grey.darken-3.white-text
+            .row.no-pad-bot
+               .col.s12.title
+                  +header('dashboard', name)
+                  +hr
             +canvas(parent)
 
             +controlpannel(parent)

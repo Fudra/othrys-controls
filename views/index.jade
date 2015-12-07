@@ -2,15 +2,19 @@
 extends  master
 
 include mixins/_soundboard
+include mixins/_maincontrol
 
 block content
-   .container
-      .row
-         .col.s5
-            +soundboard('sound1', 'track #01')
-         .col.s1
-            section.section
+   //.container
+   .row
+      .col.s4
+         +soundboard('sound1', 'track #01')
 
-         .col.s5
-            +soundboard('sound2', 'track #02')
+      .col.s4
+         +maincontrol('main', 'Othrys Controls')
+
+      .col.s4
+         +soundboard('sound2', 'track #02')
+
+
 
