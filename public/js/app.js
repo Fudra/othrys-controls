@@ -2,10 +2,6 @@
 $(function() {
     var ctx = new (window.AudioContext || window.webkitAudioContext)();
 
-    var merger = ctx.createChannelMerger(2);
-    var gain = ctx.createGain();
-
-
 
     var eq1 = new Equilizer(ctx, '#sound1', 'sound1');
     eq1.init();
@@ -13,12 +9,14 @@ $(function() {
     var eq2 = new Equilizer(ctx, '#sound2', 'sound2');
     eq2.init();
 
-    var cf = new Crossfade(ctx,'cf', 100, eq1.output, eq2.output);
-    // todo: create a pan
-    // todo: create a main gain
+    var cf = new Crossfade(ctx,'main', 100, eq1.output, eq2.output);
+    cf.init();
 
-    cf.output.connect(ctx.destination);
+    var main = new Mainmodule(ctx, 'main');
+    main.init(cf.output);
 
+    console.log(cf.output);
+    main.output.connect(ctx.destination);
 
 });
 

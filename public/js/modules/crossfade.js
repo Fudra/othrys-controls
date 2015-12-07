@@ -34,6 +34,7 @@ function Crossfade(ctx, id, initGain, src1, src2) {
     this.init = function() {
 
         this.fade(this.initGain);
+        this.config();
         this.connect();
         this.ui();
         this.update();
@@ -67,7 +68,6 @@ function Crossfade(ctx, id, initGain, src1, src2) {
     this.ui = function() {
 
         this.$gain = $('#' + this.id + '-crossfade');
-
 
         this.$gain.knob({
             min : -100,
