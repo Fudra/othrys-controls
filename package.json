@@ -24,5 +24,7 @@
     "slug": "^0.9.1",
     "wiredep": "^2.2.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "serve-index": "^1.7.2"
+  }
 }
