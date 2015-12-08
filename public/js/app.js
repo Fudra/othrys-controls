@@ -1,5 +1,10 @@
 
 $(function() {
+
+    $(window).load(function(){
+        $('#preloader').fadeOut('slow',function(){$(this).remove();});
+    });
+
     var ctx = new (window.AudioContext || window.webkitAudioContext)();
 
     var eq1 = new Equilizer(ctx, '#sound1', 'sound1');
