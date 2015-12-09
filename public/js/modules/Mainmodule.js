@@ -36,9 +36,9 @@ function Mainmodule(ctx, id) {
     };
 
     this.connect = function() {
-        this.src.connect(this.gain);
-        this.gain.connect(this.pan);
-        this.pan.connect(this.analyser);
+        this.src.connect(this.pan);
+        this.pan.connect(this.gain);
+        this.gain.connect(this.analyser);
         this.output = this.analyser;
     };
 
@@ -85,7 +85,8 @@ function Mainmodule(ctx, id) {
     };
 
     this.update = function() {
-        this.gain.value = this.opts.gain.value;
+        this.gain.gain.value = this.opts.gain.value;
         this.pan.value = this.opts.pan.value;
+        
     };
 }
