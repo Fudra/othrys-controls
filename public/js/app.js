@@ -21,6 +21,121 @@ $(function() {
 
     main.output.connect(ctx.destination);
 
+    function midiFailure() {
+        console.log('Geht nicht!');
+    }
+
+    function midiSuccess(midi)      {
+        var inputs  =  midi.inputs;
+
+        for (var input of inputs.values())
+        {
+            /*input.addEventListener(
+             'midimessage',  midiMessage
+             );      */ input.onmidimessage = midiMessage;
+        }
+    }
+
+    if      (navigator.requestMIDIAccess)   {
+        console.log('Test');
+        navigator.requestMIDIAccess().then(
+            midiSuccess,
+            midiFailure
+        );
+    }
+    else    {
+        midiFailure();
+    }
+
+    function midiMessage(event)     {
+        console.log(
+            event.target.name,
+            event.data,
+            event.receivedTime);
+        if(event.data[1]==48)
+        {
+            main.opts.gain.value = event.data[2]/127; // zwischen 0 und 1
+            main.$gain.val(event.data[2]/127 * 100).trigger('change');
+            //main.$gain.knob.trigger('change');
+            main.update();
+        }
+        if(event.data[1]==49)
+        {
+            main.opts.pan.value = event.data[2]/63.5 - 1; // zwischen -1 und 1
+            main.$pan.val((event.data[2]/63.5 - 1 )* 100).trigger('change');
+            main.update();
+        }
+        if(event.data[1]==50)
+        {
+            eq1.opts.gain.value = event.data[2]/127; // zwischen 0 und 1
+            eq1.$gn.val(event.data[2]/127 * 100).trigger('change');
+            //main.$gain.knob.trigger('change');
+            eq1.update();
+        }
+        if(event.data[1]==51)
+        {
+            eq2.opts.gain.value = event.data[2]/127; // zwischen 0 und 1
+            eq2.$gn.val(event.data[2]/127 * 100).trigger('change');
+            //main.$gain.knob.trigger('change');
+            eq2.update();
+        }
+        if(event.data[1]==64)
+        {
+            cf.fade(event.data[2]/63.5 - 1); // zwischen -1 und 1
+            cf.$gain.val((event.data[2]/63.5 - 1 )* 100).trigger('change');
+            cf.update();
+        }
+        if(event.data[1]==14)
+        {
+            eq1.opts.filter.highpass.frequency = event.data[2]*78.74; // zwischen 1 und 10000;
+            eq1.filter.highpass.$frequency.val(event.data[2]*78.74).trigger('change');
+            eq1.update();
+        }
+        if(event.data[1]==15)
+        {
+            eq1.opts.filter.lowpass.frequency = event.data[2]*78.74; // zwischen 1 und 10000;
+            eq1.filter.lowpass.$frequency.val(event.data[2]*78.74).trigger('change');
+            eq1.update();
+        }
+        if(event.data[1]==16)
+        {
+            eq1.opts.filter.bandpass.frequency = event.data[2]*78.74; // zwischen 1 und 10000;
+            eq1.filter.bandpass.$frequency.val(event.data[2]*78.74).trigger('change');
+            eq1.update();
+        }
+        if(event.data[1]==17)
+        {
+            eq1.opts.source.playrate = event.data[2]/63.5; // zwischen 0 und 2;
+            eq1.$playrate.val(event.data[2]/63.5).trigger('change');
+            eq1.update();
+        }
+        if(event.data[1]==18)
+        {
+            eq2.opts.filter.highpass.frequency = event.data[2]*78.74; // zwischen 1 und 10000;
+            eq2.filter.highpass.$frequency.val(event.data[2]*78.74).trigger('change');
+            eq2.update();
+        }
+        if(event.data[1]==19)
+        {
+            eq2.opts.filter.lowpass.frequency = event.data[2]*78.74; // zwischen 1 und 10000;
+            eq2.filter.lowpass.$frequency.val(event.data[2]*78.74).trigger('change');
+            eq2.update();
+        }
+        if(event.data[1]==20)
+        {
+            eq2.opts.filter.bandpass.frequency = event.data[2]*78.74; // zwischen 1 und 10000;
+            eq2.filter.bandpass.$frequency.val(event.data[2]*78.74).trigger('change');
+            eq2.update();
+        }
+        if(event.data[1]==21)
+        {
+            eq2.opts.source.playrate = event.data[2]/63.5; // zwischen 0 und 2;
+            eq2.$playrate.val(event.data[2]/63.5).trigger('change');
+            eq2.update();
+        }
+
+    }
+
 });
 
 //var ctx = new AudioContext();
