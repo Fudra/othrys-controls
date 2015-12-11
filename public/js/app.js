@@ -1,11 +1,44 @@
 
+
+
+
 $(function() {
+
+
+
+
 
     $(window).load(function(){
         $('#preloader').fadeOut('slow',function(){$(this).remove();});
     });
 
     var ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+
+    var bufferSize = 4096;
+    var bitcrusher = (function() {
+        var node = ctx.createScriptProcessor(bufferSize, 1, 1);
+        node.bits = 4; // between 1 and 16
+        node.normfreq = 0.1; // between 0.0 and 1.0
+        var step = Math.pow(1/2, node.bits);
+        var phaser = 0;
+        var last = 0;
+        node.onaudioprocess = function(e) {
+            var input = e.inputBuffer.getChannelData(0);
+            var output = e.outputBuffer.getChannelData(0);
+            for (var i = 0; i < bufferSize; i++) {
+                phaser += node.normfreq;
+                if (phaser >= 1.0) {
+                    phaser -= 1.0;
+                    last = step * Math.floor(input[i] / step + 0.5);
+                }
+                output[i] = last;
+            }
+        };
+        return node;
+    })();
+
+
 
     var eq1 = new Equilizer(ctx, '#sound1', 'sound1');
     eq1.init();
@@ -16,10 +49,21 @@ $(function() {
     var cf = new Crossfade(ctx,'main', -100, eq1.output, eq2.output);
     cf.init();
 
+
+    cf.output.connect(bitcrusher);
+
+
     var main = new Mainmodule(ctx, 'main');
-    main.init(cf.output);
+    //main.init(cf.output);
+    main.init(bitcrusher);
 
     main.output.connect(ctx.destination);
+   // bitcrusher.connect(ctx.destination);
+
+    //var oscillator = audioContext.createOscillator();
+    //oscillator.connect(effect);
+    //effect.connect(audioContext.destination);
+
 
     function midiFailure() {
         console.log('Geht nicht!');
