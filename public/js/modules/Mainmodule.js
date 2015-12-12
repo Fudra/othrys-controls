@@ -87,6 +87,10 @@ function Mainmodule(ctx, id) {
     this.update = function() {
         this.gain.gain.value = this.opts.gain.value;
         this.pan.value = this.opts.pan.value;
-        
     };
+
+    this.trigger = function () {
+       this.$gain.trigger('change');
+    };
+
 }

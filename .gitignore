@@ -32,5 +32,6 @@ node_modules
 
 # app files
 public/music/*
+!public/music/.gitkeep
 public/vendor/*
 
