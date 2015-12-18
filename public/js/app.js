@@ -25,7 +25,7 @@ $(function() {
     var cf = new Crossfade(ctx,'main', -100, eq1.output, eq2.output);
     cf.init();
 
-    var filter = new Bitcrusher(ctx);
+    var filter = new Convolver(ctx);
     cf.output.connect(filter);
 
 
